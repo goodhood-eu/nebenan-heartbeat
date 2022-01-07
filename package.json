@@ -7,7 +7,7 @@
   "homepage": "https://nebenan.de/",
   "repository": "goodhood-eu/nebenan-heartbeat",
   "bugs": "https://github.com/goodhood-eu/nebenan-heartbeat/issues",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "files": [
     "dist/*.js"
   ],
