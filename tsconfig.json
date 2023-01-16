@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es2017",
+    "target": "es2016",
     "module": "esnext",
     "allowJs": true,
     "sourceMap": true,
@@ -19,11 +19,10 @@
     "declarationMap": true,
     "outDir": "lib"
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*.ts"],
   "exclude": [
     "**/node_modules",
     "**/.*/",
     "**/lib",
-    "src/**/*.test.ts"
   ]
 }

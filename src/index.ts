@@ -18,7 +18,9 @@ const removeListener = (id: number) => {
   delete listeners[id];
 };
 
-const addListener = (interval: number, callback: (...args: any[]) => ReturnType<typeof removeListener>) => {
+const addListener = (
+  interval: number,
+  callback: (...args: any[]) => ReturnType<typeof removeListener>) => {
   if (typeof callback !== 'function') throw new Error('Listener function required');
   lastIndex += 1;
 
