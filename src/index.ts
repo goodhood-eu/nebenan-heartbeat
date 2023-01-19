@@ -1,56 +1,56 @@
+type Milliseconds = number;
+
 type Listener = {
-  interval: number,
+  interval: Milliseconds,
   callback: () => void,
-  called: number
+  calledLastAt: Milliseconds,
 };
 
-type Listeners = { [id: number]: Listener };
+type TeardownFunction = () => void;
 
-const HEARTBEAT_INTERVAL = 1000 * 10; // 10sec
+const MILLISECONDS_PER_SECOND: Milliseconds = 1000;
+const HEARTBEAT_INTERVAL: Milliseconds = 10 * MILLISECONDS_PER_SECOND;
+
 const isAlive = typeof window !== 'undefined';
-const listeners:Listeners = {};
+const listeners = new Map<Listener['callback'], Listener>();
 
-let lastIndex = 0;
-let heartbeatTid: ReturnType<typeof setTimeout> | undefined;
-
-const removeListener = (id: number) => {
-  if (!listeners[id]) return;
-  delete listeners[id];
-};
+let timer: ReturnType<typeof setTimeout> | undefined;
 
 const addListener = (
-  interval: number,
-  callback: (...args: any[]) => ReturnType<typeof removeListener>) => {
+  interval: Listener['interval'],
+  callback: Listener['callback']): TeardownFunction => {
+  // TODO: remove check in next breaking release
   if (typeof callback !== 'function') throw new Error('Listener function required');
-  lastIndex += 1;
 
-  const id = lastIndex;
   const called = Date.now();
 
-  listeners[id] = { interval, callback, called };
+  const listener: Listener = { interval, callback, calledLastAt: called };
+  listeners.set(callback, listener);
 
-  return () => removeListener(id);
+  return () => { listeners.delete(callback); };
 };
 
 const heartbeatLoop = () => {
   const now = Date.now();
 
-  for (const key of Object.keys(listeners).map(Number)) {
-    const item = listeners[key];
+  for (const [,item] of listeners) {
     // Item may have been deleted during iteration cycle
-    if (item && (now - item.called > item.interval)) {
+    if (!item) continue;
+
+    const isOverdue = now - item.calledLastAt > item.interval;
+    if (isOverdue) {
       item.callback();
-      item.called = now;
+      item.calledLastAt = now;
     }
   }
 
-  heartbeatTid = setTimeout(heartbeatLoop, HEARTBEAT_INTERVAL);
+  timer = setTimeout(heartbeatLoop, HEARTBEAT_INTERVAL);
 };
 
 const handleVisibilityChanged = () => {
   if (document.hidden) {
-    clearTimeout(heartbeatTid);
-    heartbeatTid = undefined;
+    clearTimeout(timer);
+    timer = undefined;
   } else heartbeatLoop();
 };
 
