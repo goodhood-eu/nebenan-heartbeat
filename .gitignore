@@ -36,5 +36,5 @@ node_modules/*
 lib/
 
 # Yalc
-.yalc
+.yalc/
 yalc.lock
