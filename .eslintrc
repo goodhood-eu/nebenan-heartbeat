@@ -4,7 +4,7 @@
       "files": [
         "**/*.cjs",
         "**/*.js",
-        "**/*.test.ts"
+        "**/*.test.js"
       ],
       "env": {
         "mocha": true
@@ -13,22 +13,13 @@
         "no-unused-expressions": "off"
       },
       "extends": [
-        "nebenan-base",
-        "airbnb-typescript/base"
-      ],
-      "parserOptions": {
-        "project": [
-          "./tsconfig.eslint.json"
-        ]
-      }
+        "nebenan-base"
+      ]
     },
     {
       "files": [
         "**/*.ts",
         "**/*.tsx"
-      ],
-      "excludedFiles": [
-        "**/*.test.ts"
       ],
       "extends": [
         "nebenan-base",
