@@ -23,7 +23,7 @@
     "lint:fix": "eslint --fix ./",
     "lint:tofile": "eslint --no-color -o ./eslint-report.log ./",
     "lint:typescript": "tsc --noEmit",
-    "test": "TZ='GMT' mocha",
+    "test": "npm run build && TZ='GMT' mocha",
     "test:tofile": "npm run build && TZ='GMT' mocha --no-colors -R spec \"test/**/*.js\" 2>&1 | tee test-report.log"
   },
   "devDependencies": {
