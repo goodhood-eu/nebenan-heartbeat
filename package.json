@@ -1,10 +1,10 @@
 {
   "name": "nebenan-heartbeat",
   "description": "Nebenan heartbeat helper library",
-  "author": "Nebenan.de <info@nebenan.de>",
-  "license": "SEE LICENSE IN LICENSE FILE",
-  "homepage": "https://nebenan.de/",
-  "repository": "goodhood-eu/nebenan-heartbeat",
+  "author": "Good Hood GmbH <tech@nebenan.de>",
+  "license": "MIT",
+  "homepage": "https://github.com/goodhood-eu/nebenan-heartbeat#readme",
+  "repository": "github:goodhood-eu/nebenan-heartbeat",
   "bugs": "https://github.com/goodhood-eu/nebenan-heartbeat/issues",
   "version": "1.1.0",
   "files": [
