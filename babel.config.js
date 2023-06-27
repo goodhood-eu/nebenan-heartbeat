@@ -11,7 +11,6 @@ module.exports = (api) => {
     ['add-module-exports', { addDefaultProperty: true }],
     '@babel/plugin-transform-strict-mode',
     '@babel/plugin-transform-runtime',
-    '@babel/plugin-proposal-json-strings',
   ];
 
   return { presets, plugins };
